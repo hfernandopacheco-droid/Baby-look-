@@ -353,7 +353,12 @@ export const ResumenDelDia: React.FC<ResumenDelDiaProps> = ({
       textColorLight: 'text-amber-900',
       textColorDark: 'text-amber-200',
       statsMain: `${diaperStats.total} ${diaperStats.total === 1 ? 'pañal' : 'pañales'}`,
-      statsSub: `${diaperStats.wet} 💧 • ${diaperStats.dirty} 💩`
+      statsSub: [
+        diaperStats.wet > 0 ? `${diaperStats.wet} 💧` : null,
+        diaperStats.dirty > 0 ? `${diaperStats.dirty} 💩` : null,
+        diaperStats.mixed > 0 ? `${diaperStats.mixed} 🌟` : null,
+        diaperStats.clean > 0 ? `${diaperStats.clean} ✨` : null,
+      ].filter(Boolean).join(' • ') || '0 💧 • 0 💩'
     },
     {
       tipo: 'sueno',
