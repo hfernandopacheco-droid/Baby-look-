@@ -142,8 +142,14 @@ export default function App() {
     window.history.pushState(null, '', '/');
   }, []);
 
-  // Auth loading state
-  const [authLoading, setAuthLoading] = useState<boolean>(true);
+  // Auth loading state (instant false if cached user exists for 0ms startup)
+  const [authLoading, setAuthLoading] = useState<boolean>(() => {
+    try {
+      const saved = localStorage.getItem("bubblo_currentUser");
+      if (saved) return false;
+    } catch {}
+    return true;
+  });
 
   // 2. Users state (strictly isolated to current user)
   const [currentUserState, setCurrentUserState] = useState<BabyUser | null>(() => {

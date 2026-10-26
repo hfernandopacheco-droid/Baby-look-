@@ -65,7 +65,7 @@ export const PerfilComunidad: React.FC<PerfilComunidadProps> = ({
 }) => {
   const [profile, setProfile] = useState<any>(null);
   const [userPosts, setUserPosts] = useState<PostData[]>([]);
-  const [activeContentTab, setActiveContentTab] = useState<'todo' | 'fotos' | 'reels'>('todo');
+  const [activeContentTab, setActiveContentTab] = useState<'todo' | 'momentos' | 'fotos' | 'reels'>('todo');
   const [selectedLightboxPhoto, setSelectedLightboxPhoto] = useState<{ url: string; caption?: string } | null>(null);
   const [photoFilter, setPhotoFilter] = useState<'todas' | 'bebe' | 'perfil'>('todas');
   
@@ -489,6 +489,30 @@ export const PerfilComunidad: React.FC<PerfilComunidadProps> = ({
     );
   }, [userPosts]);
 
+  // Listado exclusivo de todas las imágenes y videos compartidos en publicaciones, ordenados cronológicamente
+  const profileMoments = React.useMemo(() => {
+    const list: { id: string; type: 'image' | 'video'; url: string; caption?: string; timestamp: Date; dateStr: string }[] = [];
+    userPosts.forEach((post) => {
+      if (post.mediaUrls && post.mediaUrls.length > 0) {
+        post.mediaUrls.forEach((url, i) => {
+          const isVideo = post.mediaType === 'video' || url.includes('.mp4') || url.includes('.webm') || url.startsWith('data:video');
+          const ts = post.timestamp?.toDate ? post.timestamp.toDate() : (post.createdAt ? new Date(post.createdAt) : new Date());
+          list.push({
+            id: `${post.id || 'p'}_${i}`,
+            type: isVideo ? 'video' : 'image',
+            url,
+            caption: post.texto || '',
+            timestamp: ts,
+            dateStr: ts.toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' })
+          });
+        });
+      }
+    });
+    // Ordenados cronológicamente
+    list.sort((a, b) => a.timestamp.getTime() - b.timestamp.getTime());
+    return list;
+  }, [userPosts]);
+
   // Filtro de fotos por categoría
   const displayedPhotos = React.useMemo(() => {
     if (photoFilter === 'todas') return profilePhotos;
@@ -771,12 +795,12 @@ export const PerfilComunidad: React.FC<PerfilComunidadProps> = ({
         </div>
       </div>
 
-      {/* 3. Pestañas de Contenido estilo Facebook: [Todo] [Fotos] [Reels / Videos] */}
-      <div className="flex items-center gap-2 px-1">
+      {/* 3. Pestañas de Contenido estilo Facebook: [Todo] [Mis momentos] [Fotos] [Reels / Videos] */}
+      <div className="flex items-center gap-2 px-1 overflow-x-auto no-scrollbar">
         <button
           type="button"
           onClick={() => setActiveContentTab('todo')}
-          className={`flex-1 py-2.5 px-3 rounded-2xl text-xs sm:text-sm font-bold transition-all cursor-pointer flex items-center justify-center gap-1.5 ${
+          className={`flex-1 py-2.5 px-3 rounded-2xl text-xs sm:text-sm font-bold transition-all cursor-pointer flex items-center justify-center gap-1.5 whitespace-nowrap ${
             activeContentTab === 'todo'
               ? 'bg-gradient-to-r from-rose-500 to-pink-500 text-white shadow-md shadow-rose-500/25 scale-[1.01]'
               : (isDark ? 'bg-white/5 text-slate-300 hover:bg-white/10' : 'bg-white text-slate-700 hover:bg-slate-100 shadow-sm')
@@ -790,8 +814,24 @@ export const PerfilComunidad: React.FC<PerfilComunidadProps> = ({
 
         <button
           type="button"
+          onClick={() => setActiveContentTab('momentos')}
+          className={`flex-1 py-2.5 px-3 rounded-2xl text-xs sm:text-sm font-bold transition-all cursor-pointer flex items-center justify-center gap-1.5 whitespace-nowrap ${
+            activeContentTab === 'momentos'
+              ? 'bg-gradient-to-r from-rose-500 to-pink-500 text-white shadow-md shadow-rose-500/25 scale-[1.01]'
+              : (isDark ? 'bg-white/5 text-slate-300 hover:bg-white/10' : 'bg-white text-slate-700 hover:bg-slate-100 shadow-sm')
+          }`}
+        >
+          <Sparkles className="w-3.5 h-3.5" />
+          <span>Mis momentos</span>
+          <span className={`text-[10px] px-1.5 py-0.5 rounded-full font-black ${activeContentTab === 'momentos' ? 'bg-white/25 text-white' : 'bg-rose-500/10 text-rose-500'}`}>
+            {profileMoments.length}
+          </span>
+        </button>
+
+        <button
+          type="button"
           onClick={() => setActiveContentTab('fotos')}
-          className={`flex-1 py-2.5 px-3 rounded-2xl text-xs sm:text-sm font-bold transition-all cursor-pointer flex items-center justify-center gap-1.5 ${
+          className={`flex-1 py-2.5 px-3 rounded-2xl text-xs sm:text-sm font-bold transition-all cursor-pointer flex items-center justify-center gap-1.5 whitespace-nowrap ${
             activeContentTab === 'fotos'
               ? 'bg-gradient-to-r from-rose-500 to-pink-500 text-white shadow-md shadow-rose-500/25 scale-[1.01]'
               : (isDark ? 'bg-white/5 text-slate-300 hover:bg-white/10' : 'bg-white text-slate-700 hover:bg-slate-100 shadow-sm')
@@ -807,7 +847,7 @@ export const PerfilComunidad: React.FC<PerfilComunidadProps> = ({
         <button
           type="button"
           onClick={() => setActiveContentTab('reels')}
-          className={`flex-1 py-2.5 px-3 rounded-2xl text-xs sm:text-sm font-bold transition-all cursor-pointer flex items-center justify-center gap-1.5 ${
+          className={`flex-1 py-2.5 px-3 rounded-2xl text-xs sm:text-sm font-bold transition-all cursor-pointer flex items-center justify-center gap-1.5 whitespace-nowrap ${
             activeContentTab === 'reels'
               ? 'bg-gradient-to-r from-rose-500 to-pink-500 text-white shadow-md shadow-rose-500/25 scale-[1.01]'
               : (isDark ? 'bg-white/5 text-slate-300 hover:bg-white/10' : 'bg-white text-slate-700 hover:bg-slate-100 shadow-sm')
@@ -820,6 +860,70 @@ export const PerfilComunidad: React.FC<PerfilComunidadProps> = ({
           </span>
         </button>
       </div>
+
+      {/* VISTA: [Mis momentos] - Todas las imágenes y videos compartidos organizados cronológicamente */}
+      {activeContentTab === 'momentos' && (
+        <div className="space-y-4 animate-fadeIn">
+          <div 
+            className="rounded-3xl p-5 space-y-4"
+            style={liquidGlassCard}
+          >
+            <div className="flex items-center justify-between border-b border-white/10 pb-3">
+              <div>
+                <h3 className="font-black text-base tracking-tight flex items-center gap-2">
+                  <Sparkles className="w-4 h-4 text-rose-500" />
+                  <span>Mis momentos (Línea cronológica)</span>
+                </h3>
+                <span className="text-xs opacity-65">Todas las imágenes y videos compartidos en publicaciones, en orden cronológico</span>
+              </div>
+            </div>
+
+            {profileMoments.length > 0 ? (
+              <div className="space-y-6 relative before:absolute before:inset-0 before:left-4 before:w-0.5 before:bg-rose-500/30">
+                {profileMoments.map((moment) => (
+                  <div key={moment.id} className="relative pl-10 space-y-2">
+                    {/* Timeline dot */}
+                    <div className="absolute left-2.5 top-2 w-3.5 h-3.5 rounded-full bg-rose-500 ring-4 ring-rose-500/20" />
+                    
+                    <div className="flex items-center gap-2 text-xs font-bold text-rose-500">
+                      <Calendar className="w-3.5 h-3.5" />
+                      <span>{moment.dateStr}</span>
+                    </div>
+
+                    <div 
+                      className="rounded-2xl overflow-hidden border border-white/20 shadow-lg bg-slate-900/10 cursor-pointer group"
+                      onClick={() => {
+                        if (moment.type === 'image') {
+                          setSelectedLightboxPhoto({ url: moment.url, caption: moment.caption });
+                        }
+                      }}
+                    >
+                      {moment.type === 'video' ? (
+                        <video src={moment.url} controls className="w-full max-h-80 object-cover" />
+                      ) : (
+                        <div className="relative overflow-hidden aspect-video">
+                          <img src={moment.url} alt="Momento" className="w-full h-full object-cover group-hover:scale-105 transition duration-300" />
+                        </div>
+                      )}
+                      {moment.caption && (
+                        <div className="p-3 text-xs font-medium opacity-90 bg-black/20 backdrop-blur-sm">
+                          "{moment.caption}"
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="py-12 text-center space-y-3">
+                <Sparkles className="w-10 h-10 text-rose-400 mx-auto opacity-70" />
+                <p className="font-bold text-sm">Aún no hay momentos compartidos</p>
+                <p className="text-xs opacity-70">Comparte fotos y videos en tus publicaciones para verlos aquí organizados cronológicamente 💕</p>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
 
       {/* VISTA 1: [Todo] (Detalles de Mamá + Publicar en mi muro + Lista de publicaciones) */}
       {activeContentTab === 'todo' && (

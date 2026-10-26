@@ -3,10 +3,7 @@ import { BabyEvent, BabyUser, GrowthRecord, LanguageCode, VaccineItem, EventType
 import { rE } from '../i18n';
 import { InventarioPredictivo } from './InventarioPredictivo';
 import { ResumenDelDia } from './ResumenDelDia';
-import { BabyAvatar } from './BabyAvatar';
-import { AvatarCustomizerModal } from './AvatarCustomizerModal';
-import { GrowthTimeLapseModal } from './GrowthTimeLapseModal';
-import { AvatarConfig, DEFAULT_AVATAR_CONFIG } from '../normativeTables';
+
 import {
   KE,
   LE,
@@ -113,26 +110,7 @@ export const HomeTab: React.FC<HomeTabProps> = ({
   const [isListening, setIsListening] = useState(false);
   const [isCryingDetectorActive, setIsCryingDetectorActive] = useState(false);
   const [showQrModal, setShowQrModal] = useState(false);
-  const [avatarConfig, setAvatarConfig] = useState<AvatarConfig>(() => {
-    try {
-      const saved = localStorage.getItem('bubblo_avatar_config');
-      return saved ? JSON.parse(saved) : DEFAULT_AVATAR_CONFIG;
-    } catch {
-      return DEFAULT_AVATAR_CONFIG;
-    }
-  });
-  const [showAvatarCustomizer, setShowAvatarCustomizer] = useState(false);
-  const [showTimeLapseModal, setShowTimeLapseModal] = useState(false);
 
-  const handleUpdateAvatarConfig = (newConfig: AvatarConfig) => {
-    setAvatarConfig(newConfig);
-    localStorage.setItem('bubblo_avatar_config', JSON.stringify(newConfig));
-  };
-
-  const currentTimerState = {
-    type: GA ? ('sueno' as const) : (tA ? ('biberon' as const) : null),
-    active: !!GA || !!tA
-  };
   const audioContextRef = useRef<AudioContext | null>(null);
   const analyserRef = useRef<AnalyserNode | null>(null);
   const mediaStreamRef = useRef<MediaStream | null>(null);
@@ -897,35 +875,7 @@ export const HomeTab: React.FC<HomeTabProps> = ({
         </div>
       )}
 
-      {/* STEP 3: Kawaii Animated Avatar component placed centered ABOVE Resumen del Día */}
-      <BabyAvatar
-        events={events}
-        user={user}
-        timerState={currentTimerState}
-        isCrying={isCryingDetectorActive && Math.random() > 0.9}
-        onOpenLogModal={onOpenLogModal}
-        onOpenAvatarCustomizer={() => setShowAvatarCustomizer(true)}
-      />
 
-      {/* Modales Avatar y Time-Lapse */}
-      {showAvatarCustomizer && (
-        <AvatarCustomizerModal
-          config={avatarConfig}
-          onUpdateConfig={handleUpdateAvatarConfig}
-          onClose={() => setShowAvatarCustomizer(false)}
-          isDark={isDark}
-        />
-      )}
-
-      {showTimeLapseModal && (
-        <GrowthTimeLapseModal
-          config={avatarConfig}
-          user={user}
-          growth={growth}
-          onClose={() => setShowTimeLapseModal(false)}
-          isDark={isDark}
-        />
-      )}
 
       {/* ¿Qué quieres que te recordemos? (Resumen del Día con Recordatorios Inteligentes) */}
       <ResumenDelDia
