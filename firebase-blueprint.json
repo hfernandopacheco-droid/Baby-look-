@@ -1,0 +1,175 @@
+{
+  "entities": {
+    "users": {
+      "title": "User",
+      "description": "User profile and baby data",
+      "type": "object",
+      "properties": {
+        "email": { "type": "string" },
+        "babyName": { "type": "string" },
+        "peso": { "type": "number" },
+        "talla": { "type": "number" },
+        "fechaNacimiento": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["email", "babyName"]
+    },
+    "logs": {
+      "title": "Log",
+      "description": "Baby daily activity log (lactancia, sueno, panal, crecimiento, etc.)",
+      "type": "object",
+      "properties": {
+        "tipo": { "type": "string" },
+        "fecha": { "type": "string" },
+        "datos": { "type": "object" },
+        "email": { "type": "string" }
+      },
+      "required": ["tipo"]
+    },
+    "support": {
+      "title": "SupportTicket",
+      "description": "User support tickets and admin replies",
+      "type": "object",
+      "properties": {
+        "email": { "type": "string" },
+        "babyName": { "type": "string" },
+        "mensaje": { "type": "string" },
+        "message": { "type": "string" },
+        "status": { "type": "string" },
+        "adminReply": { "type": "string" },
+        "fecha": { "type": "string" }
+      },
+      "required": ["email"]
+    },
+    "announcements": {
+      "title": "Announcement",
+      "description": "Push announcements and system messages",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "message": { "type": "string" },
+        "date": { "type": "string" },
+        "active": { "type": "boolean" }
+      },
+      "required": ["title", "message"]
+    },
+    "community_profiles": {
+      "title": "CommunityProfile",
+      "description": "Mom public community profile",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "displayName": { "type": "string" },
+        "avatarUrl": { "type": "string" },
+        "bio": { "type": "string" },
+        "bebeEdad": { "type": "string" },
+        "followersCount": { "type": "number" },
+        "followingCount": { "type": "number" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["uid", "displayName"]
+    },
+    "community_posts": {
+      "title": "CommunityPost",
+      "description": "Feed post in mom community",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "authorName": { "type": "string" },
+        "authorAvatar": { "type": "string" },
+        "texto": { "type": "string" },
+        "mediaUrls": { "type": "array" },
+        "mediaType": { "type": "string" },
+        "likesCount": { "type": "number" },
+        "comentariosCount": { "type": "number" },
+        "compartidosCount": { "type": "number" },
+        "timestamp": { "type": "string" }
+      },
+      "required": ["uid", "authorName", "texto"]
+    },
+    "community_follows": {
+      "title": "CommunityFollow",
+      "description": "Follow relationship between community members",
+      "type": "object",
+      "properties": {
+        "followerId": { "type": "string" },
+        "followingId": { "type": "string" },
+        "timestamp": { "type": "string" }
+      },
+      "required": ["followerId", "followingId"]
+    },
+    "community_reportes": {
+      "title": "CommunityReport",
+      "description": "Reports for moderation",
+      "type": "object",
+      "properties": {
+        "postId": { "type": "string" },
+        "reporterUid": { "type": "string" },
+        "motivo": { "type": "string" },
+        "timestamp": { "type": "string" }
+      },
+      "required": ["postId", "reporterUid"]
+    },
+    "community_friend_requests": {
+      "title": "CommunityFriendRequest",
+      "description": "Friend invitations between registered moms",
+      "type": "object",
+      "properties": {
+        "fromUid": { "type": "string" },
+        "fromName": { "type": "string" },
+        "fromAvatar": { "type": "string" },
+        "toUid": { "type": "string" },
+        "toName": { "type": "string" },
+        "status": { "type": "string" },
+        "timestamp": { "type": "string" }
+      },
+      "required": ["fromUid", "toUid", "status"]
+    },
+    "community_friends": {
+      "title": "CommunityFriend",
+      "description": "Friendship connection between two registered moms",
+      "type": "object",
+      "properties": {
+        "user1": { "type": "string" },
+        "user2": { "type": "string" },
+        "friendUid": { "type": "string" },
+        "friendName": { "type": "string" },
+        "friendAvatar": { "type": "string" },
+        "timestamp": { "type": "string" }
+      },
+      "required": ["user1", "user2"]
+    },
+    "community_notifications": {
+      "title": "CommunityNotification",
+      "description": "User notifications for friend requests, likes, and comments",
+      "type": "object",
+      "properties": {
+        "toUid": { "type": "string" },
+        "fromUid": { "type": "string" },
+        "fromName": { "type": "string" },
+        "fromAvatar": { "type": "string" },
+        "type": { "type": "string" },
+        "text": { "type": "string" },
+        "read": { "type": "boolean" },
+        "timestamp": { "type": "string" }
+      },
+      "required": ["toUid", "text", "type"]
+    },
+    "recordatorios": {
+      "title": "SmartReminderConfig",
+      "description": "Smart reminders configuration per activity type (panal, sueno, lactancia, biberon)",
+      "type": "object",
+      "properties": {
+        "activo": { "type": "boolean" },
+        "intervaloDiaMin": { "type": "number" },
+        "intervaloNocheMin": { "type": "number" },
+        "auto": { "type": "boolean" },
+        "ultimoAviso": { "type": "string" },
+        "siguienteAviso": { "type": "number" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["activo", "intervaloDiaMin", "intervaloNocheMin"]
+    }
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "name": "Baby Day",
+  "short_name": "Baby Day",
+  "icons": [
+    {
+      "src": "/icon-192.png?v=3",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512.png?v=3",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "theme_color": "#000000",
+  "background_color": "#FFB86A",
+  "display": "standalone",
+  "shortcuts": [
+    {
+      "name": "Registrar Pañal",
+      "short_name": "Pañal",
+      "description": "Registrar cambio de pañal",
+      "url": "/?action=panial",
+      "icons": [{ "src": "/icon-192.png?v=3", "sizes": "192x192", "type": "image/png" }]
+    },
+    {
+      "name": "Registrar Sueño",
+      "short_name": "Sueño",
+      "description": "Registrar siesta o sueño",
+      "url": "/?action=sueno",
+      "icons": [{ "src": "/icon-192.png?v=3", "sizes": "192x192", "type": "image/png" }]
+    },
+    {
+      "name": "Resumen",
+      "short_name": "Resumen",
+      "description": "Resumen del día y recordatorios",
+      "url": "/?action=resumen",
+      "icons": [{ "src": "/icon-192.png?v=3", "sizes": "192x192", "type": "image/png" }]
+    }
+  ]
+}

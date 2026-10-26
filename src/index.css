@@ -1,0 +1,321 @@
+@import "tailwindcss";
+
+@layer base {
+  body {
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+
+  h1, h2, h3, .font-heading {
+    font-family: 'Quicksand', 'Plus Jakarta Sans', sans-serif;
+  }
+}
+
+/* Claymorphism styles */
+.clay {
+  background: #fdfbf7;
+  border-radius: 24px;
+  box-shadow: 
+    10px 10px 22px rgba(166, 175, 195, 0.45),
+    -10px -10px 22px rgba(255, 255, 255, 0.95),
+    inset 3px 3px 6px rgba(255, 255, 255, 0.9),
+    inset -3px -3px 6px rgba(166, 175, 195, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.clay-dark {
+  background: #2A2A40;
+  border-radius: 24px;
+  box-shadow: 
+    8px 8px 20px rgba(0, 0, 0, 0.6),
+    -6px -6px 16px rgba(45, 55, 75, 0.35),
+    inset 2px 2px 4px rgba(255, 255, 255, 0.08),
+    inset -2px -2px 4px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.clay-press {
+  transition: all 0.15s ease-in-out;
+}
+
+.clay-press:active {
+  transform: scale(0.96) translateY(2px);
+  box-shadow: 
+    inset 4px 4px 8px rgba(166, 175, 195, 0.45),
+    inset -4px -4px 8px rgba(255, 255, 255, 0.9) !important;
+}
+
+.clay-press-dark:active {
+  transform: scale(0.96) translateY(2px);
+  box-shadow: 
+    inset 4px 4px 8px rgba(0, 0, 0, 0.7),
+    inset -4px -4px 8px rgba(255, 255, 255, 0.05) !important;
+}
+
+.quick-card {
+  border-radius: 20px;
+  padding: 1rem;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+/* ========================================================================= */
+/* PALETA CLARO / OSCURO 415541.png */
+/* ========================================================================= */
+
+/* CLARO */
+.light.quick-card, .light .quick-card, html.light .quick-card { background: #FFFFFF; border: 1.5px solid #E5E7EB; color:#111827; }
+.light.resumen-panales, .light .resumen-panales, html.light .resumen-panales { background: #FEF3C7; border: 1.5px solid #FDE68A; color:#92400E; }
+.light.resumen-biberones, .light .resumen-biberones, html.light .resumen-biberones { background: #DBEAFE; border: 1.5px solid #BFDBFE; color:#1E40AF; }
+.light.resumen-dia, .light .resumen-dia, html.light .resumen-dia { background: #FFFFFF; border: 1px solid #E5E7EB; }
+
+/* OSCURO - 415541.png */
+.dark.quick-card, .dark .quick-card, html.dark .quick-card { background: #2A2A40 !important; border: 1.5px solid #3A3A55 !important; color:white !important; }
+.dark.quick-card.card-panal, .dark .quick-card.card-panal, html.dark .quick-card.card-panal { background: #3A2E2E !important; border: 1.5px solid #5A3A3A !important; color:white !important; }
+.light.quick-card.card-panal, .light .quick-card.card-panal, html.light .quick-card.card-panal { background: #FEF3C7 !important; border: 1.5px solid #FDE68A !important; color:#92400E !important; }
+.dark.resumen-dia, .dark .resumen-dia, html.dark .resumen-dia { background: #1E1E2E !important; border: 1px solid #2A2A40 !important; }
+.dark.resumen-panales, .dark .resumen-panales, html.dark .resumen-panales { background: #3A2E2E !important; border: 1.5px solid #5A3A3A !important; color:#FCD34D !important; }
+.dark.resumen-biberones, .dark .resumen-biberones, html.dark .resumen-biberones { background: #2E3A4A !important; border: 1.5px solid #3A4A6A !important; color:#93C5FD !important; }
+.dark.cronometro-box, .dark .cronometro-box, html.dark .cronometro-box { background: #2D2A4A !important; border: 1.5px solid #4A3A6A !important; color:white !important; }
+.dark.bottom-nav, .dark .bottom-nav, html.dark .bottom-nav { background: #1A1A2A !important; border-top: 1px solid #2A2A40 !important; }
+.dark.fab-float, .dark .fab-float, html.dark .fab-float { background: #2A2A40 !important; border: 1px solid #3A3A55 !important; color:white !important; }
+
+/* Color letras modo claro y oscuro */
+.light.quick-card, .light.clay, .light.glass-nav-v7,
+.light .quick-card, .light .clay, .light .glass-nav-v7,
+html.light .quick-card, html.light .clay, html.light .glass-nav-v7 {
+  color: #111827;
+}
+
+.dark.quick-card, .dark.clay, .dark.glass-nav-v7-dark,
+.dark .quick-card, .dark .clay, .dark .glass-nav-v7-dark,
+html.dark .quick-card, html.dark .clay, html.dark .glass-nav-v7-dark {
+  color: #FFFFFF;
+}
+
+/* Reglas globales de badges para garantizar contraste perfecto */
+.light .badge-dark, html.light .badge-dark {
+  background: #F1F5F9 !important;
+  color: #1E293B !important;
+  border: 1px solid #CBD5E1 !important;
+  -webkit-text-fill-color: #1E293B !important;
+}
+.dark .badge-dark, html.dark .badge-dark {
+  background: white !important;
+  color: black !important;
+  -webkit-text-fill-color: black !important;
+}
+.light .badge-dark *, html.light .badge-dark * {
+  color: #1E293B !important;
+  -webkit-text-fill-color: #1E293B !important;
+}
+.dark .badge-dark *, html.dark .badge-dark * {
+  color: black !important;
+  -webkit-text-fill-color: black !important;
+}
+
+/* Vacunas card & badge contrast */
+.light .vaccine-card { background: #FFFFFF; color: #111827; border: 1px solid #E2E8F0; }
+.dark .vaccine-card { background: rgba(50,50,70,0.9); color: #FFFFFF; }
+
+/* High contrast headings and vaccine titles in light mode */
+.light h1, .light h2, .light h3, .light h4, .light h5, .light h6,
+html.light h1, html.light h2, html.light h3, html.light h4, html.light h5, html.light h6 {
+  color: #0F172A !important;
+  -webkit-text-fill-color: #0F172A !important;
+}
+
+.light .vaccine-card h4, html.light .vaccine-card h4 {
+  color: #000000 !important;
+  font-weight: 900 !important;
+  -webkit-text-fill-color: #000000 !important;
+}
+.light .vaccine-badge, html.light .vaccine-badge {
+  background: #EEF2FF !important;
+  color: #312E81 !important;
+  border: 1px solid #C7D2FE !important;
+  -webkit-text-fill-color: #312E81 !important;
+}
+.dark .vaccine-badge, html.dark .vaccine-badge {
+  background: white !important;
+  color: black !important;
+  -webkit-text-fill-color: black !important;
+}
+.light .vaccine-badge *, html.light .vaccine-badge * {
+  color: #312E81 !important;
+  -webkit-text-fill-color: #312E81 !important;
+}
+.dark .vaccine-badge *, html.dark .vaccine-badge * {
+  color: black !important;
+  -webkit-text-fill-color: black !important;
+}
+.dark .vaccine-badge.bg-emerald-600, .dark .vaccine-badge.bg-red-600,
+.dark .vaccine-badge.\!bg-emerald-600, .dark .vaccine-badge.\!bg-red-600 {
+  color: white !important;
+  -webkit-text-fill-color: white !important;
+}
+
+
+.light input, .light textarea, .light select,
+html.light input, html.light textarea, html.light select {
+  background: white;
+  color: #111827;
+}
+
+.dark input, .dark textarea, .dark select,
+html.dark input, html.dark textarea, html.dark select {
+  background: rgba(40, 40, 65, 0.95);
+  color: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Glassmorphism Navigation v7 */
+.glass-nav-v7 {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  box-shadow: 0 12px 35px -8px rgba(99, 102, 241, 0.18), 0 4px 16px rgba(0, 0, 0, 0.06);
+  border-radius: 36px;
+}
+
+.glass-nav-v7-dark {
+  background: rgba(26, 32, 48, 0.82);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 14px 40px -10px rgba(0, 0, 0, 0.75);
+  border-radius: 36px;
+}
+
+.glass-active-light-v7 {
+  background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+  color: #15803d;
+  box-shadow: 0 4px 14px rgba(34, 197, 94, 0.25), inset 0 1px 2px rgba(255, 255, 255, 0.9);
+}
+
+.glass-active-dark-v7 {
+  background: linear-gradient(135deg, #064e3b 0%, #047857 100%);
+  color: #ecfdf5;
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);
+}
+
+/* Glass option active buttons in modal */
+.glass-opt-active-light {
+  transform: scale(1.04);
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.2), 0 4px 12px rgba(245, 158, 11, 0.25);
+  background-color: #fef3c7 !important;
+  color: #78350f !important;
+  font-weight: 800 !important;
+}
+
+.glass-opt-active-dark {
+  transform: scale(1.04);
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.25), 0 4px 12px rgba(0, 0, 0, 0.5);
+  background-color: rgba(245, 158, 11, 0.3) !important;
+  color: #fde68a !important;
+  font-weight: 800 !important;
+}
+
+/* Event icon floating */
+.event-icon-float {
+  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.22));
+  width: 4rem;
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 1.25rem;
+}
+
+/* Floating Action Button (FAB) */
+.fab-float {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  transition: transform 0.15s ease, box-shadow 0.2s ease;
+}
+
+.fab-float:active {
+  transform: scale(0.92);
+}
+
+/* Cronómetro Stroke White on Black 34px */
+.crono-bn {
+  color: #ffffff !important;
+  -webkit-text-stroke: 2.2px #000000;
+  paint-order: stroke fill;
+  font-size: 34px !important;
+  line-height: 1.1;
+  font-weight: 900 !important;
+  letter-spacing: 2px !important;
+  font-family: monospace, ui-monospace, 'Courier New', monospace;
+  text-shadow: 0 4px 14px rgba(0, 0, 0, 0.45);
+}
+
+/* Floating Confetti Emojis */
+@keyframes floatConfettiUp {
+  0% {
+    transform: translate(0, 0) scale(0.6) rotate(0deg);
+    opacity: 1;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--tx, 0px), var(--ty, -60px)) scale(1.35) rotate(var(--trot, 20deg));
+    opacity: 0;
+  }
+}
+
+.floating-confetti-emoji {
+  position: fixed;
+  pointer-events: none;
+  z-index: 99999;
+  font-size: 24px;
+  animation: floatConfettiUp 0.9s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+  user-select: none;
+}
+
+/* Floating toast YA(C) */
+@keyframes fadeToastFast {
+  0% { transform: translate(-50%, 0) scale(0.9); opacity: 0; }
+  25% { transform: translate(-50%, -6px) scale(1.04); opacity: 1; }
+  80% { transform: translate(-50%, -8px) scale(1); opacity: 1; }
+  100% { transform: translate(-50%, -14px) scale(0.95); opacity: 0; }
+}
+
+.toast-ya {
+  position: fixed;
+  z-index: 99999;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: fadeToastFast 0.32s ease-out forwards;
+  pointer-events: none;
+}
+
+/* Bottom Nav Scroll */
+.bottom-nav-scroll {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.bottom-nav-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+/* 3D Smart Timer Typography */
+.smartTimer-digits {
+  color: #ffffff;
+  -webkit-text-stroke: 1.8px #111827;
+  text-shadow: 
+    -2px -2px 0 #111827,
+    2px -2px 0 #111827,
+    -2px 2px 0 #111827,
+    2px 2px 0 #111827,
+    0 4px 10px rgba(0, 0, 0, 0.35);
+  font-family: monospace, ui-monospace, 'Courier New', monospace;
+  letter-spacing: 2px;
+}
+
+/* Backup CSS for clean banners */
+div.mt-6.opacity-40, div.pb-2.pt-6.opacity-30 {
+  display: none !important;
+}

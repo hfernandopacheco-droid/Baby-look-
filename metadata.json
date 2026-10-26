@@ -1,0 +1,6 @@
+{
+  "name": "Baby Day - El Universo de tu Bebé",
+  "description": "App de seguimiento integral para bebés: diario, estadísticas, crecimiento, vacunas y nutrición con 100 recetas.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
