@@ -24,12 +24,12 @@ export const Navbar: React.FC<NavbarProps> = ({
   const navRef = useRef<HTMLDivElement>(null);
 
   const tabs: { id: NavTab; label: string; icon: React.ReactNode; emoji: string }[] = [
-    { id: 'inicio', label: t.inicio, icon: <Home className="w-5 h-5" />, emoji: '🏠' },
-    { id: 'diario', label: t.diario, icon: <BookOpen className="w-5 h-5" />, emoji: '📖' },
-    { id: 'stats', label: t.stats, icon: <BarChart2 className="w-5 h-5" />, emoji: '📊' },
-    { id: 'crecimiento', label: t.crecimiento, icon: <Sprout className="w-5 h-5" />, emoji: '🌱' },
-    { id: 'vacunas', label: t.vacunas, icon: <Syringe className="w-5 h-5" />, emoji: '💉' },
-    { id: 'nutricion', label: t.nutricion, icon: <Utensils className="w-5 h-5" />, emoji: '🍽️' },
+    { id: 'inicio', label: t.inicio, icon: <Home className="w-6 h-6" />, emoji: '🏠' },
+    { id: 'diario', label: t.diario, icon: <BookOpen className="w-6 h-6" />, emoji: '📖' },
+    { id: 'stats', label: t.stats, icon: <BarChart2 className="w-6 h-6" />, emoji: '📊' },
+    { id: 'crecimiento', label: t.crecimiento, icon: <Sprout className="w-6 h-6" />, emoji: '🌱' },
+    { id: 'vacunas', label: t.vacunas, icon: <Syringe className="w-6 h-6" />, emoji: '💉' },
+    { id: 'nutricion', label: t.nutricion, icon: <Utensils className="w-6 h-6" />, emoji: '🍽️' },
   ];
 
   const ef = (tabId: NavTab, e: React.MouseEvent<HTMLButtonElement>) => {
@@ -50,9 +50,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           {tabs.map((tab) => {
             const isActive = currentTab === tab.id;
             const activeClass = isActive
-              ? isDark 
-                ? 'glass-active-dark-v7 font-bold shadow-md scale-[1.04] ring-[3px] ring-white/20' 
-                : 'glass-active-light-v7 font-bold shadow-md scale-[1.04] ring-[3px] ring-black/20'
+              ? 'bg-emerald-500/25 dark:bg-emerald-500/35 backdrop-blur-md border border-emerald-400/50 text-emerald-900 dark:text-emerald-100 font-bold shadow-lg scale-105 ring-2 ring-emerald-400/40'
               : isDark 
                 ? 'hover:bg-slate-800/60 text-slate-300 opacity-80 hover:opacity-100' 
                 : 'hover:bg-amber-100/60 text-slate-600 opacity-80 hover:opacity-100';
@@ -62,12 +60,12 @@ export const Navbar: React.FC<NavbarProps> = ({
                 id={`nav-tab-${tab.id}`}
                 key={tab.id}
                 onClick={(e) => ef(tab.id, e)}
-                className={`flex flex-col items-center justify-center min-w-[62px] py-1.5 px-2 rounded-2xl transition-all duration-200 clay-press cursor-pointer shrink-0 ${activeClass}`}
+                className={`flex flex-col items-center justify-center min-w-[62px] py-2 px-2.5 rounded-2xl transition-all duration-200 clay-press cursor-pointer shrink-0 ${activeClass}`}
               >
-                <div className="flex items-center justify-center mb-0.5 text-base">
-                  {useClay ? <span>{tab.emoji}</span> : tab.icon}
+                <div className="flex items-center justify-center mb-1 text-lg">
+                  {useClay ? <span className="text-xl">{tab.emoji}</span> : tab.icon}
                 </div>
-                <span className="text-[10px] tracking-tight leading-none whitespace-nowrap font-medium">
+                <span className="text-[10px] tracking-tight leading-none whitespace-nowrap font-bold">
                   {tab.label}
                 </span>
               </button>

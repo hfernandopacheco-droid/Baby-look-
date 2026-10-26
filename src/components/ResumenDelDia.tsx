@@ -500,25 +500,25 @@ export const ResumenDelDia: React.FC<ResumenDelDiaProps> = ({
       </div>
 
       {/* 2. Grid 2x2 con las 4 tarjetas de eventos de hoy */}
-      <div className="grid grid-cols-2 gap-3">
+      <div className="grid grid-cols-2 gap-3.5">
         {rows.map(row => (
           <div
             key={row.tipo}
             onClick={() => onNavigateTab && onNavigateTab('stats')}
-            className={`p-3.5 rounded-2xl border transition-all cursor-pointer select-none flex flex-col justify-between ${
+            className={`p-4.5 sm:p-5 rounded-3xl border-2 transition-all cursor-pointer select-none flex flex-col justify-between shadow-md hover:shadow-lg active:scale-[0.98] ${
               isDark
-                ? `${row.colorBgDark} ${row.borderDark} hover:border-amber-400/50`
-                : `${row.colorBgLight} ${row.borderLight} hover:border-amber-400/70`
+                ? `${row.colorBgDark} ${row.borderDark} hover:border-amber-400/60`
+                : `${row.colorBgLight} ${row.borderLight} hover:border-amber-400/80`
             }`}
           >
-            <div className="flex items-center justify-between mb-2">
-              <div className={`w-8 h-8 rounded-xl flex items-center justify-center font-bold ${
-                isDark ? 'bg-black/30' : 'bg-white/80 shadow-xs'
+            <div className="flex items-center justify-between mb-3">
+              <div className={`w-9 h-9 rounded-2xl flex items-center justify-center font-bold shadow-xs ${
+                isDark ? 'bg-black/40 text-white' : 'bg-white shadow-sm text-slate-800'
               }`}>
                 {row.icon}
               </div>
-              <span className={`text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full ${
-                isDark ? 'bg-black/20 text-slate-300' : 'bg-white/60 text-slate-700'
+              <span className={`text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-xl shadow-2xs ${
+                isDark ? 'bg-black/30 text-slate-200' : 'bg-white/80 text-slate-700'
               }`}>
                 {row.label}
               </span>
@@ -529,7 +529,7 @@ export const ResumenDelDia: React.FC<ResumenDelDiaProps> = ({
               }`}>
                 {row.statsMain}
               </div>
-              <div className="text-[11px] font-semibold opacity-75 mt-0.5">
+              <div className="text-[11px] font-bold opacity-80 mt-1">
                 {row.statsSub}
               </div>
             </div>
