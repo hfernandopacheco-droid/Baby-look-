@@ -274,11 +274,9 @@ export function KE(events: BabyEvent[]) {
     const sub = (d.subType || (d as any).tipo || '').toLowerCase();
     if (sub.includes('limp') || sub.includes('clean')) {
       clean++;
-    } else if (sub.includes('mixt') || sub.includes('mix')) {
+    } else if (sub.includes('mixt') || sub.includes('mix') || (sub.includes('mojad') && sub.includes('suci'))) {
       mixed++;
-      wet++;
-      dirty++;
-    } else if (sub.includes('suc') || sub.includes('dirt') || sub.includes('caca')) {
+    } else if (sub.includes('suc') || sub.includes('dirt') || sub.includes('caca') || sub.includes('popó') || sub.includes('popo')) {
       dirty++;
     } else {
       wet++;
@@ -312,7 +310,7 @@ export function LE(events: BabyEvent[]) {
   };
 }
 
-// TE(): Sleep stats: day vs night (Día 7:00 a 19:00, Noche 19:00 a 7:00)
+// TE(): Sleep stats: day vs night (Día 7:00 a 19:00, Noche 19:00 a 7:00) with g9() h:m:s format
 export function TE(events: BabyEvent[]) {
   const sleepEvents = events.filter(e => e.type === 'sueno');
   let daySeconds = 0;
@@ -324,8 +322,6 @@ export function TE(events: BabyEvent[]) {
     const dur = s.duration || 0;
     const timeParts = (s.time || '12:00').split(':');
     const hour = parseInt(timeParts[0], 10) || 12;
-    // Día estándar: 7:00 am a 7:00 pm (07:00 a 18:59)
-    // Noche estándar: 7:00 pm a 7:00 am (19:00 a 06:59)
     const isNight = hour >= 19 || hour < 7;
     if (isNight) {
       nightSeconds += dur;
@@ -344,9 +340,9 @@ export function TE(events: BabyEvent[]) {
     totalSeconds,
     daySeconds,
     nightSeconds,
-    dayHours: (daySeconds / 3600).toFixed(1),
-    nightHours: (nightSeconds / 3600).toFixed(1),
-    totalHours: (totalSeconds / 3600).toFixed(1)
+    dayHours: g9(daySeconds),
+    nightHours: g9(nightSeconds),
+    totalHours: g9(totalSeconds)
   };
 }
 

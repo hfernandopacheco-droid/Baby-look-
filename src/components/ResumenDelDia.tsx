@@ -500,25 +500,25 @@ export const ResumenDelDia: React.FC<ResumenDelDiaProps> = ({
       </div>
 
       {/* 2. Grid 2x2 con las 4 tarjetas de eventos de hoy */}
-      <div className="grid grid-cols-2 gap-3.5">
+      <div className="grid grid-cols-2 gap-4">
         {rows.map(row => (
           <div
             key={row.tipo}
             onClick={() => onNavigateTab && onNavigateTab('stats')}
-            className={`p-4.5 sm:p-5 rounded-3xl border-2 transition-all cursor-pointer select-none flex flex-col justify-between shadow-md hover:shadow-lg active:scale-[0.98] ${
+            className={`p-4.5 sm:p-5 rounded-[2rem] border-2 transition-all cursor-pointer select-none flex flex-col justify-between active:scale-[0.98] ${
               isDark
-                ? `${row.colorBgDark} ${row.borderDark} hover:border-amber-400/60`
-                : `${row.colorBgLight} ${row.borderLight} hover:border-amber-400/80`
+                ? `${row.colorBgDark} ${row.borderDark} shadow-[0_10px_25px_rgba(0,0,0,0.3),inset_0_1px_3px_rgba(255,255,255,0.1)] hover:border-amber-400/60`
+                : `${row.colorBgLight} ${row.borderLight} shadow-[0_12px_30px_rgba(0,0,0,0.08),inset_0_2px_6px_rgba(255,255,255,0.8)] hover:border-amber-400/80`
             }`}
           >
             <div className="flex items-center justify-between mb-3">
-              <div className={`w-9 h-9 rounded-2xl flex items-center justify-center font-bold shadow-xs ${
-                isDark ? 'bg-black/40 text-white' : 'bg-white shadow-sm text-slate-800'
+              <div className={`w-10 h-10 rounded-2xl flex items-center justify-center font-bold shadow-sm ${
+                isDark ? 'bg-black/40 text-white shadow-black/40' : 'bg-white shadow-md text-slate-800'
               }`}>
                 {row.icon}
               </div>
-              <span className={`text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-xl shadow-2xs ${
-                isDark ? 'bg-black/30 text-slate-200' : 'bg-white/80 text-slate-700'
+              <span className={`text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-xl shadow-xs ${
+                isDark ? 'bg-black/30 text-slate-200' : 'bg-white/90 text-slate-700'
               }`}>
                 {row.label}
               </span>
